@@ -1,0 +1,108 @@
+:root {
+    --primary-color: #668363;
+    --secondary-color: #9B6688;
+  
+    --text-color: #333;
+    --link-color: #668363;
+    --link-hover-color: var(--secondary-color);
+    --link-hover-font-weight: bolder;
+    --link-hover-text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+    --background-color: #f8f8f8;
+    --navbar-background: var(--primary-color);
+  
+    --border-color: #ddd;
+  
+    --button-background: #668363;
+    --button-text-color: white;
+    --button-hover-background: #40523D;
+    --button-hover-text-color: var(--secondary-color);
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    overflow: hidden;
+  }
+  
+  nav {
+    background-color: var(--background-color);
+    color: var(--link-color);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  #logo {
+    width: 90px;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav li {
+    margin: 0 15px;
+    position: relative;
+    padding: 0 2rem ;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: var(--link-color);
+    transition: color 0.3s;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+  
+  nav a:hover {
+    color: var(--link-hover-color);
+    font-weight: var(--link-hover-font-weight);
+    text-shadow: var(--link-hover-text-shadow);
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    padding: 2rem;
+    background-color: var(--background-color);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    width: 100%;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  #search-bar {
+    margin-right: 15px;
+    font-size: 1.2rem;
+    outline: none;
+    border: none;
+    width: 100%;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  #search-bar:focus{
+    outline: none;
+    box-shadow: 0 0 10px 5px #66836398;
+  }
+  
+  #cart-icon {
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: var(--link-color);
+  }
+  
