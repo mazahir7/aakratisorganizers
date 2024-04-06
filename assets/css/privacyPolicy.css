@@ -1,0 +1,98 @@
+:root {
+
+    /**
+     * colors
+     */
+  
+    --spanish-gray: hsl(0, 0%, 60%);
+    --sonic-silver: hsl(0, 0%, 47%);
+    --eerie-black: hsl(0, 0%, 13%);
+    --primary-color: #668363;
+    --sandy-brown: hsl(29, 90%, 65%);
+    --bittersweet: hsl(0, 100%, 70%);
+    --ocean-green: hsl(152, 51%, 52%);
+    --davys-gray: hsl(0, 0%, 33%);
+    --cultured: hsl(0, 0%, 93%);
+    --white: hsl(0, 100%, 100%);
+    --onyx: hsl(0, 0%, 27%);
+}
+
+.privacy-policy-heading{
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.privacy-policy-title{
+    color: var(--primary-color);
+    padding: 5px 0 5px 0;
+}
+
+.privacy-policy-text{
+    text-align: justify;
+    font-size: 1.1rem;
+}
+
+.privacy-policy-bold{
+    font-weight: bold;
+}
+
+.privacy-policy-list li{
+    list-style: disc;
+    line-height: 2;
+}
+
+.privacy-policy-list{
+    margin-left: 2rem;
+}
+
+span a{
+    color: black;
+    font-weight: bold;
+}
+
+.privacy-policy-closing-text{
+    padding: 2rem;
+    text-align: center;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-shadow: 0 0 4px 8px rgba(0,0,0,0.2);
+}
+
+@media only screen and (max-width: 768px) {
+
+    .privacy-policy-heading {
+        font-size: 1.5rem; /* Adjust the font size as needed */
+    }
+
+    .privacy-policy-title {
+        font-size: 1.2rem; /* Adjust the font size as needed */
+        padding: 3px 0 3px 0; /* Adjust padding as needed */
+    }
+
+    .privacy-policy-text {
+        font-size: 1rem; /* Adjust the font size as needed */
+    }
+
+    .privacy-policy-bold {
+        font-weight: normal; /* Reset font weight if needed */
+    }
+
+    .privacy-policy-list li {
+        line-height: 1.5; /* Adjust line height as needed */
+    }
+
+    .privacy-policy-list {
+        margin-left: 1rem; /* Adjust margin as needed */
+    }
+
+    span a {
+        font-weight: normal; /* Reset font weight if needed */
+    }
+
+    .privacy-policy-closing-text {
+        font-size: 1rem; /* Adjust the font size as needed */
+        padding: 1rem; /* Adjust padding as needed */
+    }
+
+}

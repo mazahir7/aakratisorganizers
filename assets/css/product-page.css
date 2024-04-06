@@ -1,0 +1,260 @@
+:root{
+    --primary-color: #668363;
+    --bg-hover: #54904d;
+}
+
+/* General Styles */
+html {
+    font-family: "Poppins", sans-serif;
+}
+
+/* Product Image Styles */
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1rem;
+}
+
+/* Product Details Container */
+.product-details {
+    width: 100%;
+}
+
+/* Product Name Styles */
+.product-name {
+    color: #333;
+}
+
+/* Product Description Styles */
+.product-description {
+    margin: 10px 0;
+    text-align: justify;
+}
+
+/* Product Form Styles */
+.product-form {
+    margin: 20px 0;
+}
+
+/* Form Label Styles */
+.form-label {
+    display: block;
+    margin: 5px 0;
+}
+
+/* Form Input, Select, and Button Styles */
+.form-input,
+.form-select,
+.form-button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Form Button Styles */
+.form-button {
+    background: var(--primary-color);
+    color: white;
+    border: 0;
+    cursor: pointer;
+    border-radius: 10rem;
+    transition: 0.3s ease-in;
+    width: 49%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Form Button Hover Styles */
+.form-button:hover {
+    background: var(--bg-hover);
+}
+
+/* Product Info Container */
+.product-info {
+    display: flex;
+    align-items: center;
+    margin-top: 5%;
+}
+
+/* Button Container Styles */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+/* Quantity Input Styles */
+.quantity-input {
+    display: flex;
+    align-items: center;
+    border: 1px solid #333;
+    width: fit-content;
+    border-radius: 1rem;
+}
+
+.quantity-input button {
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.quantity-input span {
+    margin: 0 10px;
+    font-size: 16px;
+}
+
+/* Rating Styles */
+.rating {
+    color: goldenrod;
+    display: flex;
+}
+
+.rating p {
+    color: #333;
+    margin-top: -0.5%;
+}
+
+/* Product Price Styles */
+.product-price {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.8rem;
+    font-weight: 500;
+    padding-top: 1rem;
+}
+
+.product-main-price {
+    margin-right: 1rem;
+    margin-bottom: auto;
+}
+
+.product-del-price {
+    font-size: 1rem;
+    align-self: flex-end;
+}
+
+/* Category Below Product Styles */
+.category-below-product {
+    background: var(--primary-color);
+    width: fit-content;
+    color: #ffff;
+    padding: 0.4rem;
+    border-radius: 0.2rem;
+    margin-top: 1rem;
+}
+
+/* Product Image Box Styles */
+.product-image-box {
+    width: 100%;
+    height: 29rem;
+    margin-right: 2rem;
+    object-fit: cover;
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.111);
+}
+
+/* Suggested Posts Styles */
+.suggested-posts {
+    margin-top: 2rem;
+}
+
+.suggested-posts h4 {
+    font-size: 2rem;
+}
+
+/* Suggested Posts Card Container Styles */
+.suggested-posts-card-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 16px;
+}
+
+/* Suggested Post Card Styles */
+.suggested-post-card {
+    flex: 0 0 auto;
+    width: 250px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.111);
+    margin-bottom: 2rem;
+    padding: 1rem;
+}
+
+.suggested-post-card img {
+    width: 100%;
+    height: 15rem;
+    object-fit: cover;
+}
+
+/* Media Queries for Responsive Design */
+
+/* For screens up to 767px */
+@media screen and (max-width: 767px) {
+    .form-button,
+    .suggested-post-card {
+        width: 100%;
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .product-info,
+    .button-container {
+        flex-direction: column;
+    }
+
+    .product-image-box {
+        width: 100%;
+        margin-right: 0;
+        padding: 0;
+        height: 20rem;
+    }
+
+    .suggested-post-card img {
+        height: 10rem;
+    }
+}
+
+/* For screens between 768px and 991px */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .form-button,
+    .suggested-post-card {
+        width: 49%;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .product-info,
+    .button-container {
+        flex-direction: column;
+    }
+
+    .product-image-box {
+        width: 90%;
+        margin-right: 2rem;
+        padding: 10px;
+        height: 25rem;
+    }
+
+    .suggested-post-card img {
+        height: 12rem;
+    }
+}
+
+/* For screens between 992px and 999px */
+@media screen and (min-width: 992px) and (max-width: 999px) {
+    .form-button {
+        font-size: 14px;
+    }
+
+    .product-image-box {
+        width: 80%;
+        height: 30rem;
+    }
+
+    .suggested-post-card img {
+        height: 14rem;
+    }
+}
