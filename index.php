@@ -1,6 +1,21 @@
 <?php
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
+  error_reporting(E_ALL);
+  ini_set("display_errors", 1);
+
+  session_start(); // Start the session
+
+  // Check if the user is logged in
+  if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
+      // User is logged in, print session details
+      echo "Session ID: " . $_SESSION['id'] . "<br>";
+      echo "Session Full Name: " . $_SESSION['full_name'] . "<br>";
+      echo "Session Email: " . $_SESSION['email'] . "<br>";
+  } else {
+      // User is not logged in, redirect to login.php
+      header("Location: login.html");
+      exit(); // Make sure to exit after redirecting
+  }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

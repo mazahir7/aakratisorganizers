@@ -33,8 +33,7 @@
         }
 
         .color-option,.size-option{
-
-            border: 5px solid #aaa;
+            border: 5px solid rgba(0,0,,0,0.1);
         }
 
         .color-option {
@@ -50,7 +49,8 @@
 
         /* Optional: Add selected state */
         .size-option.selected, .color-option.selected {
-            border: 5px solid #007bff; /* Add border for selected state */
+            border: 5px solid #000; /* Add border for selected state */
+            /* box-shadow: 0 0 5px #000; */
         }
 
 
@@ -119,13 +119,21 @@ if (isset($_GET['id'])) {
 
                 <p class="product-description"><?php echo $row['description']; ?></p>
 
-                <form action="checkout.php" method="post" class="product-form">
+
+                <!-- add fields and make fillcart.php -->
+                <form action="fillCart.php" method="post" class="product-form">
+
+                    <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
+                    <input type="hidden" name="selected_size" id="selected-size" value="">
+                    <input type="hidden" name="selected_color" id="selected-color" value="">
+                    <input type="hidden" name="selected_quantity" id="selected-quantity" value="1">
+                    <input type="hidden" name="selected_price" id="selected-price" value="0">
 
                     <label for="size">Size:</label>
                     <div class="size-options">
                         <?php
                         // Fetch product variations (sizes) from the database
-                        $sizeQuery = "SELECT DISTINCT size, price FROM product_variations WHERE product_id = $productId";
+                        $sizeQuery = "SELECT DISTINCT size, price FROM product_variations_dimension WHERE product_id = $productId";
                         $sizeResult = $conn->query($sizeQuery);
                         if ($sizeResult->num_rows > 0) {
                             while ($sizeRow = $sizeResult->fetch_assoc()) {
@@ -143,7 +151,7 @@ if (isset($_GET['id'])) {
                     <div class="color-options">
                         <?php
                         // Fetch product variations (colors) from the database
-                        $colorQuery = "SELECT DISTINCT color FROM product_variations WHERE product_id = $productId";
+                        $colorQuery = "SELECT DISTINCT color FROM product_variations_colors WHERE product_id = $productId";
                         $colorResult = $conn->query($colorQuery);
                         if ($colorResult->num_rows > 0) {
                             while ($colorRow = $colorResult->fetch_assoc()) {
@@ -157,14 +165,14 @@ if (isset($_GET['id'])) {
                     </div>
                         <label for="quantity" class="form-label">Quantity:</label>
                         <div class="quantity-input">
-                            <button type="button" onclick="decrementQuantity()">-</button>
+                            <button type="button" id="decrement-quantity">-</button>
                             <span id="quantity">1</span>
-                            <button type="button" onclick="incrementQuantity()">+</button>
+                            <button type="button" id="increment-quantity">+</button>
                         </div>
                         
                         <div class="button-container">
                             <button type="submit" class="form-button">Add to Cart</button>
-                            <button type="submit" class="form-button">Buy Now</button>
+                            <!-- <button type="submit" class="form-button">Buy Now</button> -->
                         </div>
                 </form>
 
@@ -250,55 +258,85 @@ if (isset($_GET['id'])) {
 
     <script>
        document.addEventListener("DOMContentLoaded", function() {
+                var quantityValue = 1; // Initial quantity value
 
-var quantityValue = 1; // Initial quantity value
+        function incrementQuantity() {
+            quantityValue++;
+            updateQuantityDisplay();
+        }
 
-function incrementQuantity() {
-    quantityValue++;
-    updateQuantityDisplay();
-}
+        function decrementQuantity() {
+            if (quantityValue > 1) {
+                quantityValue--;
+                updateQuantityDisplay();
+            }
+        }
 
-function decrementQuantity() {
-    if (quantityValue > 1) {
-        quantityValue--;
-        updateQuantityDisplay();
-    }
-}
+        function updateQuantityDisplay() {
+            document.getElementById('quantity').innerText = quantityValue;
+            updateQuantity(quantityValue);
+        }
 
-function updateQuantityDisplay() {
-    document.getElementById('quantity').innerText = quantityValue;
-}
+        // Select increment and decrement buttons
+        var incrementButton = document.getElementById('increment-quantity');
+        var decrementButton = document.getElementById('decrement-quantity');
 
-const sizeButtons = document.querySelectorAll('.size-option');
-const colorButtons = document.querySelectorAll('.color-option');
-const productPrice = document.getElementById('pay-price'); // Assuming you have an element with ID 'pay-price'
+        // Add event listeners to the buttons
+        incrementButton.addEventListener('click', incrementQuantity);
+        decrementButton.addEventListener('click', decrementQuantity);
 
-sizeButtons.forEach(button => {
-    button.addEventListener('click', function() {
-        const size = button.dataset.size;
-        const price = parseFloat(button.dataset.price); // Parse price to float
-        // Update price based on selected size
-        updatePrice(size, price);
-        // Toggle selected class for size buttons
-        sizeButtons.forEach(btn => btn.classList.remove('selected'));
-        button.classList.add('selected');
-    });
-});
+                
+        const sizeButtons = document.querySelectorAll('.size-option');
+        const colorButtons = document.querySelectorAll('.color-option');
+        const productPrice = document.getElementById('pay-price');
+        const formSize = document.getElementById("selected-size");
+        const formColor = document.getElementById("selected-color");
+        const formQuantity = document.getElementById("selected-quantity");
+        const formPrice = document.getElementById("selected-price");
 
-colorButtons.forEach(button => {
-    button.addEventListener('click', function() {
-        // Toggle selected class for color buttons
-        colorButtons.forEach(btn => btn.classList.remove('selected'));
-        button.classList.add('selected');
-    });
-});
+        sizeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const size = button.dataset.size;
+                const price = parseFloat(button.dataset.price);
 
-// Function to update price based on selected size
-function updatePrice(size, price) {
-    // Display the price of the selected size
-    productPrice.innerText = "₹" + price.toFixed(2);
-}
-});
+                updateSize(size);
+                updatePrice(price);
+                
+                sizeButtons.forEach(btn => btn.classList.remove('selected'));
+                button.classList.add('selected');
+            });
+        });
+
+        colorButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                
+                const color = button.dataset.color;
+                console.log(color);
+                updateColor(color);
+                colorButtons.forEach(btn => btn.classList.remove('selected'));
+                button.classList.add('selected');
+            });
+        });
+
+        // Function to update price based on selected size
+        function updatePrice(price) {
+            formPrice.value  = price.toFixed(2);
+            productPrice.innerText = "₹" + price.toFixed(2);
+        }
+
+        function updateSize(size) {
+            formSize.value = size;
+        }
+        
+        function updateColor(color) {
+            formColor.value = color;
+        }
+
+        function updateQuantity(quantity) {
+            formQuantity.value = quantity;
+        }
+
+        });
 
 
     </script>

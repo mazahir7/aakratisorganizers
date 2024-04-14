@@ -1,3 +1,9 @@
+<?php 
+  if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+  }
+?>
+
 <header>
 
 <div class="header-top">
@@ -89,10 +95,42 @@
         <span class="count">0</span>
       </button> -->
 
-      <button class="action-btn">
+      <!-- <button class="action-btn" id="cart-desktop">
         <ion-icon name="bag-handle-outline"></ion-icon>
         <span class="count">0</span>
-      </button>
+      </button> -->
+
+
+      <?php
+
+        // Include database connection
+        include_once './assets/php/connection.php';
+       
+
+        // Get the user_id from the session
+        $user_id = $_SESSION['id'];
+
+        // Fetch the count of items in the cart for the specific user
+        $count_query = "SELECT COUNT(*) AS item_count FROM cart WHERE user_id = $user_id";
+        $count_result = $conn->query($count_query);
+
+        // Initialize item count variable
+        $item_count = 0;
+
+        // Check if the count query was successful
+        if ($count_result->num_rows > 0) {
+            // Fetch the count of items
+            $item_count = $count_result->fetch_assoc()['item_count'];
+        }
+      ?>
+
+        <a href="cart.php">
+            <button class="action-btn" id="cart-desktop">
+                <ion-icon name="bag-handle-outline"></ion-icon>
+                <span class="count"><?php echo $item_count; ?></span>
+            </button>
+        </a>
+
 
     </div>
 
@@ -107,7 +145,7 @@
     <ul class="desktop-menu-category-list">
 
       <li class="menu-category">
-        <a href="#" class="menu-title">Home</a>
+        <a href="index.php" class="menu-title">Home</a>
       </li>
 
       <li class="menu-category">
@@ -182,20 +220,24 @@
   <button class="action-btn" data-mobile-menu-open-btn>
     <ion-icon name="menu-outline"></ion-icon>
   </button>
-
-  <button class="action-btn">
-    <ion-icon name="bag-handle-outline"></ion-icon>
-
-    <span class="count">0</span>
-  </button>
-
+  
   <button class="action-btn">
     <ion-icon name="home-outline"></ion-icon>
   </button>
 
-  <button class="action-btn" data-mobile-menu-open-btn>
+  
+  <a href="cart.php">
+    <button class="action-btn" id="cart-mobile">
+      <ion-icon name="bag-handle-outline"></ion-icon>
+      <span class="count"><?php echo $item_count;?></span>
+    </button>
+  </a>
+
+
+
+  <!-- <button class="action-btn" data-mobile-menu-open-btn>
     <ion-icon name="grid-outline"></ion-icon>
-  </button>
+  </button> -->
 
 </div>
 
@@ -212,7 +254,7 @@
   <ul class="mobile-menu-category-list">
 
     <li class="menu-category">
-      <a href="#" class="menu-title">Home</a>
+      <a href="index.php" class="menu-title">Home</a>
     </li>
 
     <?php

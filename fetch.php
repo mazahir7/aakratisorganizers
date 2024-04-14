@@ -71,7 +71,7 @@ ini_set("display_errors", 1);
     <img src="./assets/images/products/<?php echo $row["image"]; ?>"
          alt="<?php echo $row["name"]; ?>"
          class="product-img-default"
-         style="max-width: 200px !important; max-height: 150px !important; width: auto !important; height: auto !important;">
+         style="max-width: 100% !important; max-height: 200px !important; width: 100% !important; height: auto !important; aspect-ratio:9/16;">
 
 
             </div>
